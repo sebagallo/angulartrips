@@ -1,0 +1,23 @@
+body {
+	background: url(images/background.jpg);
+	background-attachment: fixed;
+	background-repeat: repeat;
+}
+
+.trips {
+	padding:30px;
+	padding-bottom:100px;
+	padding-top:100px;
+}
+
+.trips:nth-child(even) {
+	background: #CCC
+}
+.trips:nth-child(odd) {
+	background: #FFF
+}
+
+/*.vcenter {
+	display: flex;
+    align-items: center;
+}*/
