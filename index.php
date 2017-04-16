@@ -25,10 +25,10 @@
                 <a class="navbar-brand" href="#"><span class="fa fa-plane">&nbsp;</span>AngularTrips</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <form class="navbar-form navbar-left" role="search" ng-submit="onSearchSubmit(selectedDest)">
+                <form class="navbar-form navbar-left" role="search" ng-submit="onSearchSubmit(selectedDest, 'search')">
                     <div class="form-group">
                         <!-- <input type="text" autocomplete="off" placeholder="Seleziona destinazione..." ng-model="selectedDest" uib-typeahead="dest for dest in destinations | filter:$viewValue | limitTo:5" class="form-control" typeahead-on-select="onSelectTA($item, $model, $label)" typeahead-focus-first="false"> -->
-                        <input type="text" autocomplete="off" placeholder="Seleziona destinazione..." ng-model="selectedDest" uib-typeahead="dest for dest in asyncTA($viewValue) | limitTo:5" class="form-control" typeahead-on-select="onSelectTA($item, $model, $label)" typeahead-focus-first="false" typeahead-loading="loadingDests" typeahead-no-results="noResults">
+                        <input type="text" autocomplete="off" placeholder="Seleziona destinazione..." ng-model="selectedDest" uib-typeahead="dest for dest in asyncTA($viewValue) | limitTo:5" class="form-control" typeahead-on-select="onSearchSubmit($item, 'select')" typeahead-focus-first="false" typeahead-loading="loadingDests" typeahead-no-results="noResults">
                         <i ng-show="loadingDests" class="glyphicon glyphicon-refresh"></i><i ng-show="noResults"><i class="glyphicon glyphicon-remove"></i> Nessuna destinazione trovata...</i>
                     </div>
                 </form>
@@ -39,6 +39,14 @@
                             <li ng-repeat="avail in avails"><a href="#" ng-click="onSelectDate(avail)">{{ avail | date:'fullDate' }}</a></li>
                         </ul>
                     </li>
+<!--                     <li>
+                        <div class="input-group navbar-form" ng-show="timeshow">
+                            <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" close-text="Chiudi" placeholder="Seleziona data">
+                            <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="dpOpen()">Seleziona Data <i class="fa fa-calendar"></i></button>
+                        </span>
+                        </div>
+                    </li> -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://www.sebagallo.eu">SG 2017</a></li>
