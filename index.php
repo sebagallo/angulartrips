@@ -3,10 +3,10 @@
 
 <head>
     <title>AngularTrips</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/loaders.css/0.1.2/loaders.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
@@ -39,7 +39,7 @@
                             <li ng-repeat="avail in avails"><a href="#" ng-click="onSelectDate(avail)">{{ avail | date:'fullDate' }}</a></li>
                         </ul>
                     </li>
-<!--                     <li>
+                    <!-- <li>
                         <div class="input-group navbar-form" ng-show="timeshow">
                             <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" close-text="Chiudi" placeholder="Seleziona data">
                             <span class="input-group-btn">
@@ -55,13 +55,16 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row trips" ng-repeat="trip in trips">
+        <div ng-show="isLoading" class="loader text-center">
+            <h3>Sto Cercando...</h3>
+            <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando...">
+        </div>
+        <div ng-hide="isLoading" class="row trips" ng-repeat="trip in trips">
             <div class="col-xs-12 col-md-3 text-center">
                 <img class="img-responsive img-circle" alt="{{ trip.resort }}" ng-src="{{ trip.img_path }}">
                 <h3>{{ trip.avail | date:'fullDate' }}</h3>
             </div>
             <div class="col-xs-12 col-md-6 text-justify">
-                <!-- <div class="loading" loader-css="ball-clip-rotate-pulse"></div> -->
                 <h3>{{ trip.dest + " - " + trip.resort }}</h3>
                 <p>{{ trip.txt }}</p>
             </div>
@@ -74,6 +77,7 @@
             </div>
         </div>
     </div>
+    <a class="github-fork-ribbon right-bottom fixed" href="https://github.com/sebagallo/angulartrips" title="Github Source">Esamina Source su Github</a>
     <!-- LIBRARIES REMOTE -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -84,7 +88,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <!-- LIBRARIES LOCAL -->
-    <!-- <script src="angular-loaders.min.js"></script> -->
     <!-- SCRIPTS -->
     <!-- <script src="jq.js"></script> -->
     <script src="angapp.js"></script>

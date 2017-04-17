@@ -1,23 +1,39 @@
 body {
-	background: url(images/background.jpg);
-	background-attachment: fixed;
-	background-repeat: repeat;
+    background: url(images/background.jpg);
+    background-attachment: fixed;
+    background-repeat: repeat;
 }
 
 .trips {
-	padding:30px;
-	padding-bottom:100px;
-	padding-top:100px;
+    padding:30px;
+    padding-bottom:100px;
+    padding-top:100px;
 }
 
 .trips:nth-child(even) {
-	background: #CCC
+    background: #CCC
 }
 .trips:nth-child(odd) {
-	background: #FFF
+    background: #FFF
+}
+
+.github-fork-ribbon.right-bottom:before {
+    background-color: #05F;
+}
+
+.loader {
+    padding-top: 150px;
+    padding-bottom: 100px;
+    background-color: #FFF;
+}
+
+.loader > img {
+    margin: auto;
+    display: block;
+    max-width: 400px;
 }
 
 /*.vcenter {
-	display: flex;
+    display: flex;
     align-items: center;
 }*/
