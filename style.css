@@ -85,6 +85,14 @@ body {
     padding: 10px;
 }
 
+.uib-datepicker-popup.dropdown-menu .btn-info {
+    font-weight: bold;
+}
+.uib-datepicker-popup.dropdown-menu .btn:enabled:not(.uib-left):not(.uib-title):not(.uib-right)  {
+    background-color: #55AAFFFF;
+    font-weight: bold;
+}
+
 /*.vcenter {
     display: flex;
     align-items: center;
