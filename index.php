@@ -34,20 +34,20 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
+                    <!-- <li class="dropdown">
                         <a href="#" ng-show="timeshow" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-calendar">&nbsp;</span>Seleziona Data<b class="caret">&nbsp;</b></a>
                         <ul class="dropdown-menu">
                             <li ng-repeat="avail in avails"><a href="#" ng-click="onSelectDate(avail)">{{ avail | date:'fullDate' }}</a></li>
                         </ul>
-                    </li>
-                    <!-- <li>
+                    </li> -->
+                    <li>
                         <div class="input-group navbar-form" ng-show="timeshow">
-                            <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" close-text="Chiudi" placeholder="Seleziona data">
+                            <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" placeholder="Seleziona data" ng-change="onSelectDate(selectedAvail)" datepicker-popup-template-url="popup.html">
                             <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="dpOpen()">Seleziona Data <i class="fa fa-calendar"></i></button>
                         </span>
                         </div>
-                    </li> -->
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://www.sebagallo.eu">SG 2017</a></li>
@@ -62,15 +62,11 @@
             <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando...">
         </div>
         <div class="home row" ng-show="isHome">
-        <?php
+            <?php
             $apiurl = 'http://www.sebagallo.eu/anjs/api.php';
             $apicontent = file_get_contents($apiurl);
             $apijson = json_decode($apicontent, true);
-            // var_dump($apijson);
-            // var_dump($apicontent);
             foreach($apijson as $trip) {
-                // $date = date_create($trip[avail]);
-                // $datef = date_format($date, 'l j F Y');
                 $datef = strftime("%A %e %B %Y", strtotime($trip[avail]));
                 echo
                 "<div class='col-xs-12 col-md-4 hometrip'>
@@ -79,7 +75,7 @@
                             <h2><strong>$trip[dest]</strong></h2>
                             <p class='small'>$trip[resort]</p>
                             <h3>da $datef<h3>
-                            <h3>$trip[durata] notti!</h3>
+                            <h3>$trip[durata] notti - <strong>$trip[prezzo] €</strong></h3>
                             <p class='pull-right'><button class='btn btn-primary'>Prenota Ora!</button></p>
                         </div>
                     </div>
