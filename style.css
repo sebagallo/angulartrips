@@ -4,10 +4,28 @@ body {
     background-repeat: repeat;
 }
 
+.tripscontainer {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .trips {
+    margin-top: 10px;
+    height: 100%;
+    border-radius: 15px;
     padding:30px;
-    padding-bottom:100px;
-    padding-top:100px;
+    padding-bottom:50px;
+    padding-top:50px;
+    opacity: 1;
+    transition: all linear 0.5s;
+}
+
+.trips:hover {
+    box-shadow: 0 0 10px #0000FF;
+}
+
+.trips.ng-enter {
+    opacity: 0;
 }
 
 .trips:nth-child(even) {
@@ -22,10 +40,17 @@ body {
 }
 
 .loader {
+    border-radius: 15px;
+    margin-top: 10px;
     padding-top: 100px;
     padding-bottom: 100px;
     background-color: #FFF;
+    transition: all linear 0.5s;
 }
+
+/*.loader.ng-leave {
+    opacity: 0;
+}*/
 
 .loader > img {
     margin: auto;
@@ -44,6 +69,11 @@ body {
     background-attachment: fixed;
     background-position: center center;
     height: 300px;
+    transition: all linear 0.3s;
+}
+
+.innertrip:hover {
+    box-shadow: 0 0 20px #0000FF;
 }
 
 .tripcontent {

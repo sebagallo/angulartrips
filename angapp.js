@@ -25,6 +25,7 @@
         //  };
         $scope.returnHome = function () {
             $scope.isHome = true;
+            $scope.timeshow = false;
         };
         $scope.asyncTA = function(val) {
             return $http.get('api.php?q=listDestSearch&dest='+val).then(function(data){

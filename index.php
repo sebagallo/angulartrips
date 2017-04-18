@@ -57,7 +57,7 @@
     </nav>
     <div class="container">
         <div style="height:50px"></div>
-        <div ng-show="isLoading" class="loader text-center">
+        <div ng-cloak ng-show="isLoading" class="loader text-center">
             <h3>Sto Cercando...</h3>
             <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando...">
         </div>
@@ -104,6 +104,7 @@
                 </p>
             </div>
         </div>
+        <div style="height:50px"></div>
     </div>
     <a class="github-fork-ribbon right-bottom fixed" href="https://github.com/sebagallo/angulartrips" title="Github Source">Esamina Source su Github</a>
     <!-- LIBRARIES REMOTE -->
