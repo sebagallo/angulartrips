@@ -85,6 +85,10 @@ body {
     padding: 10px;
 }
 
+.uib-datepicker-popup.dropdown-menu {
+    left: auto !important;
+}
+
 .uib-datepicker-popup.dropdown-menu .btn-info {
     font-weight: bold;
 }
