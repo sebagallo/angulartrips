@@ -22,7 +22,7 @@ body {
 }
 
 .loader {
-    padding-top: 150px;
+    padding-top: 100px;
     padding-bottom: 100px;
     background-color: #FFF;
 }
@@ -31,6 +31,26 @@ body {
     margin: auto;
     display: block;
     max-width: 400px;
+}
+
+.hometrip {
+    padding: 50px;
+}
+
+.innertrip {
+    border-radius: 25px;
+    padding: 20px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    height: 300px;
+}
+
+.tripcontent {
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.7);
+    height: 100%;
+    padding: 10px;
 }
 
 /*.vcenter {

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php setlocale(LC_ALL, 'it_IT.utf8', 'ita'); ?>
 <html ng-app="store" lang="it-IT">
 
 <head>
@@ -22,7 +23,7 @@
                     <span class="icon-bar">&nbsp;</span>
                     <span class="icon-bar">&nbsp;</span>
                 </button>
-                <a class="navbar-brand" href="#"><span class="fa fa-plane">&nbsp;</span>AngularTrips</a>
+                <a class="navbar-brand" ng-click="returnHome()" href="#"><span class="fa fa-plane">&nbsp;</span>AngularTrips</a>
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <form class="navbar-form navbar-left" role="search" ng-submit="onSearchSubmit(selectedDest, 'search')">
@@ -55,17 +56,44 @@
         </div>
     </nav>
     <div class="container">
+        <div style="height:50px"></div>
         <div ng-show="isLoading" class="loader text-center">
             <h3>Sto Cercando...</h3>
             <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando...">
         </div>
-        <div ng-hide="isLoading" class="row trips" ng-repeat="trip in trips">
+        <div class="home row" ng-show="isHome">
+        <?php
+            $apiurl = 'http://www.sebagallo.eu/anjs/api.php';
+            $apicontent = file_get_contents($apiurl);
+            $apijson = json_decode($apicontent, true);
+            // var_dump($apijson);
+            // var_dump($apicontent);
+            foreach($apijson as $trip) {
+                // $date = date_create($trip[avail]);
+                // $datef = date_format($date, 'l j F Y');
+                $datef = strftime("%A %e %B %Y", strtotime($trip[avail]));
+                echo
+                "<div class='col-xs-12 col-md-4 hometrip'>
+                    <div class='innertrip' style='background:url($trip[img_path])'>
+                        <div class='tripcontent text-center'>
+                            <h2><strong>$trip[dest]</strong></h2>
+                            <p class='small'>$trip[resort]</p>
+                            <h3>da $datef<h3>
+                            <h3>$trip[durata] notti!</h3>
+                            <p class='pull-right'><button class='btn btn-primary'>Prenota Ora!</button></p>
+                        </div>
+                    </div>
+                </div>";
+            }
+        ?>
+        </div>
+        <div ng-cloak ng-hide="isLoading || isHome" class="row trips" ng-repeat="trip in trips">
             <div class="col-xs-12 col-md-3 text-center">
                 <img class="img-responsive img-circle" alt="{{ trip.resort }}" ng-src="{{ trip.img_path }}">
                 <h3>{{ trip.avail | date:'fullDate' }}</h3>
             </div>
             <div class="col-xs-12 col-md-6 text-justify">
-                <h3>{{ trip.dest + " - " + trip.resort }}</h3>
+                <h3><strong>{{ trip.dest + " - " + trip.resort }}</strong></h3>
                 <p>{{ trip.txt }}</p>
             </div>
             <div class="col-xs-12 col-md-3 text-center">
