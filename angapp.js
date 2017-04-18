@@ -7,13 +7,7 @@
         $scope.qMethod = undefined;
         $scope.dest = undefined;
         $scope.avails = undefined;
-        // $http.get('api.php').then(function(data){
-        //     $scope.trips = data.data;
-        // });
-        // NOT-ASYNC METHOD
-        // $http.get('api.php?q=listDest').then(function(data) {
-        //     $scope.destinations = data.data;
-        // });
+        $scope.isCollapsed = true;
         $scope.dpOpen = function() {
             $scope.dpPopup.opened = true;
         };
@@ -75,6 +69,7 @@
                 }
             }).finally(function() {
                 $scope.isLoading = false;
+                $scope.isCollapsed = true;
             });
         };
         $scope.onSelectDate = function($item) {
@@ -93,6 +88,7 @@
                 $scope.trips = data.data;
             }).finally(function() {
                 $scope.isLoading = false;
+                $scope.isCollapsed = true;
             });
         };
      });

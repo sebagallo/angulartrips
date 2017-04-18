@@ -17,7 +17,7 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
                     <span class="sr-only">Abilita Nav</span>
                     <span class="icon-bar">&nbsp;</span>
                     <span class="icon-bar">&nbsp;</span>
@@ -25,30 +25,21 @@
                 </button>
                 <a class="navbar-brand" ng-click="returnHome()" href="#"><span class="fa fa-plane">&nbsp;</span>AngularTrips</a>
             </div>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <div class="collapse navbar-collapse" uib-collapse="isCollapsed">
                 <form class="navbar-form navbar-left" role="search" ng-submit="onSearchSubmit(selectedDest, 'search')">
                     <div class="form-group">
-                        <!-- <input type="text" autocomplete="off" placeholder="Seleziona destinazione..." ng-model="selectedDest" uib-typeahead="dest for dest in destinations | filter:$viewValue | limitTo:5" class="form-control" typeahead-on-select="onSelectTA($item, $model, $label)" typeahead-focus-first="false"> -->
                         <input type="text" autocomplete="off" placeholder="Seleziona destinazione..." ng-model="selectedDest" uib-typeahead="dest for dest in asyncTA($viewValue) | limitTo:5" class="form-control" typeahead-on-select="onSearchSubmit($item, 'select')" typeahead-focus-first="false" typeahead-loading="loadingDests" typeahead-no-results="noResults">
-                        <i ng-show="loadingDests" class="glyphicon glyphicon-refresh"></i><i ng-show="noResults"><i class="glyphicon glyphicon-remove"></i> Nessuna destinazione trovata...</i>
+                        <i ng-show="loadingDests" class="fa fa-refresh fa-spin"></i><i ng-show="noResults"><i class="fa fa-remove"></i> Nessuna destinazione trovata...</i>
                     </div>
                 </form>
-                <ul class="nav navbar-nav">
-                    <!-- <li class="dropdown">
-                        <a href="#" ng-show="timeshow" class="dropdown-toggle" data-toggle="dropdown"><span class="fa fa-calendar">&nbsp;</span>Seleziona Data<b class="caret">&nbsp;</b></a>
-                        <ul class="dropdown-menu">
-                            <li ng-repeat="avail in avails"><a href="#" ng-click="onSelectDate(avail)">{{ avail | date:'fullDate' }}</a></li>
-                        </ul>
-                    </li> -->
-                    <li>
-                        <div class="input-group navbar-form" ng-show="timeshow">
-                            <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" placeholder="Seleziona data" ng-change="onSelectDate(selectedAvail)" datepicker-popup-template-url="popup.html">
-                            <span class="input-group-btn">
+                <form class="navbar-form navbar-left" ng-show="timeshow">
+                    <div class="form-group">
+                        <input ng-hide="true" type="text" class="form-control" uib-datepicker-popup ng-model="selectedAvail" is-open="dpPopup.opened" datepicker-options="dpOptions" ng-required="true" placeholder="Seleziona data" ng-change="onSelectDate(selectedAvail)" datepicker-popup-template-url="popup.html">
+                        <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="dpOpen()">Seleziona Data <i class="fa fa-calendar"></i></button>
                         </span>
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://www.sebagallo.eu">SG 2017</a></li>
                 </ul>
@@ -59,7 +50,8 @@
         <div style="height:50px"></div>
         <div ng-cloak ng-show="isLoading" class="loader text-center">
             <h3>Sto Cercando...</h3>
-            <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando...">
+            <i class="fa fa-spinner fa-spin fa-5x"></i>
+            <!-- <img class="img-responsive" src="images/loader.gif" alt="Sto Caricando..."> -->
         </div>
         <div class="home row" ng-show="isHome">
             <?php
@@ -104,8 +96,8 @@
     </div>
     <a class="github-fork-ribbon right-bottom fixed" href="https://github.com/sebagallo/angulartrips" title="Github Source">Esamina Source su Github</a>
     <!-- LIBRARIES REMOTE -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_it-it.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
