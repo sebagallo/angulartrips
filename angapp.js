@@ -47,8 +47,8 @@
                 if ($scope.avails.length > 0) {
                     $scope.dpOptions.initDate = new Date($scope.avails[0]);
                     $scope.dpOptions.dateDisabled = function (data) {
-                        var date = data.date;
-                        var mode = data.mode;
+                        var dpDate = data.date;
+                        var dpMode = data.mode;
                         function areDatesEqual(date1, date2) {
                             var comp1 = date1.getFullYear()+"-"+date1.getMonth()+"-"+date1.getDate();
                             var comp2 = date2.getFullYear()+"-"+date2.getMonth()+"-"+date2.getDate();
@@ -56,11 +56,11 @@
                         }
                         var isAvail = true;
                             for(var i = 0; i < $scope.avails.length ; i++) {
-                                if(areDatesEqual(new Date($scope.avails[i]), date)){
+                                if(areDatesEqual(new Date($scope.avails[i]), dpDate)){
                                     isAvail = false;
                                 }
                             }
-                            return ( mode === 'day' && isAvail );
+                            return ( dpMode === 'day' && isAvail );
                         };
                     $scope.timeshow = true;
                 }
@@ -77,7 +77,6 @@
             $scope.isHome = false;
             $item.setDate($item.getDate() + 1);
             $scope.date = $item.toISOString().substring(0, 10);
-            console.log($scope.date);
             if ($scope.qMethod == 'select') {
                 $scope.query3 = 'api.php?q=dataDestAvail&dest=';
             }
@@ -91,5 +90,11 @@
                 $scope.isCollapsed = true;
             });
         };
-     });
+    });
+    app.directive('trip', function() {
+        return {
+            restrict: 'AE',
+            templateUrl: 'tmpl/trip.html'
+        };
+    });
 })();

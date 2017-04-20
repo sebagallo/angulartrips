@@ -20,7 +20,7 @@
  *          - return all data of matching dest and selected avail
  */
 
-// return last 6 trips by default
+// return last 9 trips by default
 $sel = "last";
 $x = 0;
 $ret=array();
