@@ -1,7 +1,6 @@
 body {
-    background: url(images/background.jpg);
     background-attachment: fixed;
-    background-repeat: repeat;
+    background-color: #5AF;
     font-family: 'Lato', sans-serif;
 }
 
@@ -42,6 +41,8 @@ body {
 }
 
 .loader {
+    color: #05F;
+    font-weight: bold;
     border-radius: 15px;
     border: 2px solid #05F;
     margin-top: 10px;
@@ -143,6 +144,10 @@ body {
 }
 
 @media (max-width: 767px) {
+    body {
+        background-image: url(images/background.jpg);
+        background-repeat: repeat;
+    }
     .home-carousel {
         height: 400px;
     }
@@ -157,6 +162,12 @@ body {
 }
 
 @media (min-width: 768px) {
+    body {
+        background-image: url(images/bkg_beach2.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
     .home-carousel {
         padding: 20px;
         height: 700px;
