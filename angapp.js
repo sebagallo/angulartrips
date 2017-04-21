@@ -8,6 +8,34 @@
         $scope.dest = undefined;
         $scope.avails = undefined;
         $scope.isCollapsed = true;
+        //carousel
+        $scope.carActive = 0;
+        $scope.carInterval = 6000;
+        $scope.carIndex = 0;
+        $scope.carSlides = [
+            {
+                image: 'https://i.ytimg.com/vi/DGIXT7ce3vQ/maxresdefault.jpg',
+                text: 'Maldive',
+                id: $scope.carIndex++
+            },
+            {
+                image: 'https://azure.luxresorts.com/media/3040876/Hotel-In-Mauritius-LUX-Le-Morne-Beach-Resort.jpg',
+                text: 'Mauritius',
+                id: $scope.carIndex++
+            },
+            {
+                image: 'https://www.secretcanaries.com/wp-content/uploads/2017/01/Gran-Canaria-1.jpg',
+                text: 'Canarie',
+                id: $scope.carIndex++
+            },
+            {
+                image: 'http://8-themes.com/wp-content/uploads/2015/12/cbefd1792723c4adddf557ad89a5122b-1280x720.jpg',
+                text: 'Alpi',
+                id: $scope.carIndex++
+            }
+        ];
+        //carousel-end
+        //datepicker
         $scope.dpOpen = function() {
             $scope.dpPopup.opened = true;
         };
@@ -26,6 +54,7 @@
                   return data.data;
             });
         };
+        //datepicker-end
         $scope.onSearchSubmit = function($item, method) {
             $scope.isLoading = true;
             $scope.isHome = false;
@@ -45,6 +74,7 @@
             $http.get($scope.query2+$scope.dest).then(function(data){
                 $scope.avails = data.data;
                 if ($scope.avails.length > 0) {
+                    //datepicker calendar
                     $scope.dpOptions.initDate = new Date($scope.avails[0]);
                     $scope.dpOptions.dateDisabled = function (data) {
                         var dpDate = data.date;
@@ -62,6 +92,7 @@
                             }
                             return ( dpMode === 'day' && isAvail );
                         };
+                    //datepicker calendar end
                     $scope.timeshow = true;
                 }
                 else{

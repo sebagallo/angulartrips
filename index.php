@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
 </head>
 
 <body ng-controller="TravelCtrl">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-default navbar-fixed-top navbar-sandtheme" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" ng-click="isCollapsed = !isCollapsed">
@@ -53,6 +54,19 @@
             <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
         <div ng-cloak class="home row" ng-show="isHome">
+            <div class="home-carousel">
+                <div uib-carousel active="carActive" interval="carInterval" no-wrap="false">
+                    <div uib-slide ng-repeat="slide in carSlides track by slide.id" index="slide.id">
+                        <a href="#">
+                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                        <div class="carousel-caption">
+                            <h4></h4>
+                            <p>{{slide.text}}</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <?php
             $apiurl = 'http://www.sebagallo.eu/anjs/api.php';
             $apicontent = file_get_contents($apiurl);
