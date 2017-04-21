@@ -2,6 +2,7 @@ body {
     background: url(images/background.jpg);
     background-attachment: fixed;
     background-repeat: repeat;
+    font-family: 'Lato', sans-serif;
 }
 
 .tripscontainer {
@@ -21,7 +22,7 @@ body {
 }
 
 .trips:hover {
-    box-shadow: 0 0 10px #0000FF;
+    box-shadow: 0 0 10px #05F;
 }
 
 .trips.ng-enter {
@@ -41,10 +42,8 @@ body {
 }
 
 .loader {
-    border-style: solid;
     border-radius: 15px;
-    border-width: 2px;
-    border-color: #05F;
+    border: 2px solid #05F;
     margin-top: 10px;
     padding-top: 100px;
     padding-bottom: 100px;
@@ -59,21 +58,36 @@ body {
 }
 
 .navbar-sandtheme:hover {
-    box-shadow: 0 0 20px #00F;
+    box-shadow: 0 0 20px #05F;
 }
 
 .navbar-sandtheme .navbar-brand {
+    font-family: 'Righteous', cursive;
     font-size: x-large;
+    color: white;
     text-shadow: -1px 0 #05F, 0 1px #05F, 1px 0 #05F, 0 -1px #05F;
-    /*font-weight: bold;*/
+    transition: all linear 0.2s;
+}
+
+.navbar-sandtheme .navbar-brand:hover {
+    color: #05F;
 }
 
 .home-carousel {
     margin-top: 25px;
 }
 
+.home-carousel img {
+    max-width: 100%;
+}
+
+.navbar-toggle {
+    background-color: #FFF;
+    border: 1px solid #000;
+}
+
 .carousel-caption {
-    bottom: 45% !important;
+    bottom: 40%;
 }
 
 .carousel-caption h1 {
@@ -105,7 +119,7 @@ body {
 }
 
 .innertrip:hover {
-    box-shadow: 0 0 20px #0000FF;
+    box-shadow: 0 0 20px #05F;
 }
 
 .tripcontent {
@@ -124,7 +138,7 @@ body {
 }
 
 .uib-datepicker-popup.dropdown-menu .btn:enabled:not(.uib-left):not(.uib-title):not(.uib-right) {
-    background-color: #55AAFFFF;
+    background-color: #5AF;
     font-weight: bold;
 }
 
@@ -155,15 +169,8 @@ body {
     .carousel {
         height: 700px;
         border-radius: 25px;
-        border-color: blue;
-        border-width: 1px;
-        border-style: solid;
-        border-radius: 25px;
+        border: 1px solid #05F;
         overflow: hidden;
-    }
-    .hometrip {
-        padding-left: 50px;
-        padding-right: 50px;
     }
 }
 

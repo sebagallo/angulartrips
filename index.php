@@ -4,14 +4,14 @@
 
 <head>
     <title>AngularTrips</title>
-    <link rel="stylesheet" href="style.css?v=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Acme" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Acme|Righteous" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body ng-controller="TravelCtrl">
@@ -55,9 +55,9 @@
         </div>
         <div ng-cloak class="home row" ng-show="isHome">
             <div class="home-carousel">
-                <div uib-carousel active="carActive" interval="carInterval" no-wrap="false">
+                <div uib-carousel active="carActive" interval="carInterval" no-wrap="false" template-url="tmpl/carousel.html">
                     <div uib-slide ng-repeat="slide in carSlides track by slide.id" index="slide.id">
-                        <a ng-href="slide.link">
+                        <a ng-href="{{slide.link}}">
                         <img ng-src="{{slide.image}}" style="margin:auto;">
                         <div class="carousel-caption">
                             <h1 class="text-uppercase">{{slide.text}}</h1>
@@ -98,7 +98,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_it-it.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-touch.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-touch.min.js"></script>
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <!-- LIBRARIES LOCAL -->

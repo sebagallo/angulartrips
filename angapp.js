@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('store', ['ngAnimate', 'ui.bootstrap']);
+    var app = angular.module('store', ['ngAnimate', 'ngTouch', 'ui.bootstrap']);
 
     app.controller('TravelCtrl', function($scope, $http) {
         $scope.isLoading = undefined;
