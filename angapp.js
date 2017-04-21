@@ -15,23 +15,27 @@
         $scope.carSlides = [
             {
                 image: 'https://i.ytimg.com/vi/DGIXT7ce3vQ/maxresdefault.jpg',
-                text: 'Maldive',
-                id: $scope.carIndex++
+                text: 'Prenota ora la vacanza dei tuoi sogni!',
+                id: $scope.carIndex++,
+                link: '#'
             },
             {
                 image: 'https://azure.luxresorts.com/media/3040876/Hotel-In-Mauritius-LUX-Le-Morne-Beach-Resort.jpg',
-                text: 'Mauritius',
-                id: $scope.carIndex++
+                text: 'Scopri le nuove offerte per l\'estate 2016',
+                id: $scope.carIndex++,
+                link: '#'
             },
             {
                 image: 'https://www.secretcanaries.com/wp-content/uploads/2017/01/Gran-Canaria-1.jpg',
-                text: 'Canarie',
-                id: $scope.carIndex++
+                text: 'Inserisci testo ad alto impatto quì!!',
+                id: $scope.carIndex++,
+                link: '#'
             },
             {
                 image: 'http://8-themes.com/wp-content/uploads/2015/12/cbefd1792723c4adddf557ad89a5122b-1280x720.jpg',
-                text: 'Alpi',
-                id: $scope.carIndex++
+                text: 'Che belle slide, veramente fantastiche.',
+                id: $scope.carIndex++,
+                link: '#'
             }
         ];
         //carousel-end

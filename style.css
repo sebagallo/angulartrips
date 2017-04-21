@@ -2,7 +2,6 @@ body {
     background: url(images/background.jpg);
     background-attachment: fixed;
     background-repeat: repeat;
-    font-family: 'Lato', sans-serif;
 }
 
 .tripscontainer {
@@ -64,33 +63,23 @@ body {
 }
 
 .navbar-sandtheme .navbar-brand {
-    font-size: large;
+    font-size: x-large;
     text-shadow: -1px 0 #05F, 0 1px #05F, 1px 0 #05F, 0 -1px #05F;
     /*font-weight: bold;*/
 }
 
-.navbar-sandtheme a {
-    /*color: black !important;*/
-}
-
 .home-carousel {
     margin-top: 25px;
-    padding: 20px;
 }
 
-.carousel {
-    border-radius: 25px;
-    border-color: blue;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 25px;
-    overflow: hidden;
+.carousel-caption {
+    bottom: 45% !important;
 }
 
-.carousel-caption p {
-    color: gray;
-    font-size: x-large;
-    text-shadow: -1px 0 #05F, 0 1px #05F, 1px 0 #05F, 0 -1px #05F;
+.carousel-caption h1 {
+    font-family: 'Acme', sans-serif;
+    color: white;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 }
 
 .carousel .carousel-control {
@@ -103,8 +92,6 @@ body {
 
 .hometrip {
     padding-top: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
 }
 
 .innertrip {
@@ -141,6 +128,44 @@ body {
     font-weight: bold;
 }
 
+@media (max-width: 767px) {
+    .home-carousel {
+        height: 400px;
+    }
+
+    .home-carousel img {
+        height: 400px;
+    }
+
+    .carousel {
+        height: 400px;
+    }
+}
+
+@media (min-width: 768px) {
+    .home-carousel {
+        padding: 20px;
+        height: 700px;
+    }
+
+    .home-carousel img {
+        height: 700px;
+    }
+
+    .carousel {
+        height: 700px;
+        border-radius: 25px;
+        border-color: blue;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 25px;
+        overflow: hidden;
+    }
+    .hometrip {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
 
 /*.vcenter {
     display: flex;

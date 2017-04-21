@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Acme" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
@@ -50,18 +50,18 @@
     <div class="container">
         <div style="height:50px"></div>
         <div ng-show="isLoading" class="loader text-center">
-            <h3>Sto Cercando...</h3>
+            <h1>Sto Cercando...</h1>
             <i class="fa fa-spinner fa-spin fa-5x"></i>
         </div>
         <div ng-cloak class="home row" ng-show="isHome">
             <div class="home-carousel">
                 <div uib-carousel active="carActive" interval="carInterval" no-wrap="false">
                     <div uib-slide ng-repeat="slide in carSlides track by slide.id" index="slide.id">
-                        <a href="#">
+                        <a ng-href="slide.link">
                         <img ng-src="{{slide.image}}" style="margin:auto;">
                         <div class="carousel-caption">
-                            <h4></h4>
-                            <p>{{slide.text}}</p>
+                            <h1 class="text-uppercase">{{slide.text}}</h1>
+                            <p></p>
                         </div>
                         </a>
                     </div>
