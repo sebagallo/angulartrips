@@ -1,5 +1,15 @@
 (function () {
-    var app = angular.module('store', ['ngAnimate', 'ngTouch', 'ui.bootstrap']);
+    var app = angular.module('store', ['ngAnimate', 'ngTouch', 'ngRoute', 'ui.bootstrap']);
+
+    app.config(function($routeProvider) {
+        $routeProvider
+        .when("/", {
+            templateUrl: "home.php",
+        })
+        .when("/viaggio/:id/*", {
+            templateUrl: "viaggio.php",
+        });
+    });
 
     app.controller('TravelCtrl', function($scope, $http) {
         $scope.isLoading = undefined;
