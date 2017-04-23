@@ -10,13 +10,28 @@
         };
         var searchState = {
             name: 'search',
-            url: '/search',
-            templateUrl: 'views/search.html'
+            url: '/search/{dest}/{avail}',
+            // controller: 'SearchCtrl',
+            templateUrl: 'views/search.html',
+            // resolve: {
+            //     srcData: function(tripService, $stateParams) {
+            //         return tripService.getDataDestSearch($stateParams.dest);
+            //     },
+            //     srcAvail: function(tripService, $stateParams) {
+            //         return tripService.getListDestAvailSearch($stateParams.dest);
+            //     }
+            // }
         };
         var tripState = {
             name: 'trip',
-            url: '/trip',
-            templateUrl: 'views/trip.html'
+            url: '/trip/{id}',
+            controller: 'TripCtrl',
+            templateUrl: 'views/trip.html',
+            resolve: {
+                tripdet: function(tripService, $stateParams) {
+                    return tripService.getDataDestID($stateParams.id);
+                }
+            }
         };
       $stateProvider.state(homeState);
       $stateProvider.state(searchState);
@@ -59,7 +74,26 @@
         ];
     });
 
-    app.controller('TravelCtrl', function($scope, $state, tripService) {
+    app.controller('TripCtrl', function(tripdet, $scope) {
+        $scope.tripdet = tripdet;
+    });
+
+    // app.controller('SearchCtrl', function(srcData, srcAvail, caldateService, $scope) {
+    //     $scope.trips = srcData;
+    //     $scope.avails = srcAvail;
+    //     if ($scope.avails.length > 0) {
+    //         $scope.dpOptions.initDate = new Date($scope.avails[0]);
+    //         $scope.dpOptions.dateDisabled = function(data, date) {
+    //             return caldateService.getAvailDates(data, $scope.avails);
+    //         };
+    //         $scope.timeshow = true;
+    //     }
+    //     else {
+    //         $scope.timeshow = false;
+    //     }
+    // });
+
+    app.controller('TravelCtrl', function($scope, $state, tripService, caldateService) {
         $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
             $scope.isLoading = true;
             $scope.isCollapsed = true;
@@ -85,6 +119,7 @@
         //datepicker-end
         $scope.returnHome = function () {
             $state.go('home');
+            $scope.timeshow = false;
         };
         $scope.asyncTA = function(dest) {
             return tripService.getListDestSearch(dest);
@@ -92,7 +127,7 @@
         $scope.onSearchSubmit = function($item, method) {
             $scope.dest = $item;
             $scope.qMethod = method;
-            $state.go('search', $scope.dest);
+            $state.go('search');
             if ($scope.qMethod == 'select') {
                 $scope.query1 = '?q=dataDest&dest=';
                 $scope.query2 = '?q=listDestAvail&dest=';
@@ -107,25 +142,10 @@
             tripService.getCustomQuery($scope.query2, $scope.dest).then(function(data) {
                 $scope.avails = data;
                 if ($scope.avails.length > 0) {
-                    //datepicker calendar dates
                     $scope.dpOptions.initDate = new Date($scope.avails[0]);
-                    $scope.dpOptions.dateDisabled = function (data) {
-                        var dpDate = data.date;
-                        var dpMode = data.mode;
-                        function areDatesEqual(date1, date2) {
-                            var comp1 = date1.getFullYear()+"-"+date1.getMonth()+"-"+date1.getDate();
-                            var comp2 = date2.getFullYear()+"-"+date2.getMonth()+"-"+date2.getDate();
-                            return (comp1 === comp2);
-                        }
-                        var isAvail = true;
-                            for(var i = 0; i < $scope.avails.length ; i++) {
-                                if(areDatesEqual(new Date($scope.avails[i]), dpDate)){
-                                    isAvail = false;
-                                }
-                            }
-                            return ( dpMode === 'day' && isAvail );
-                        };
-                    //datepicker calendar dates end
+                    $scope.dpOptions.dateDisabled = function(data, date) {
+                        return caldateService.getAvailDates(data, $scope.avails);
+                    };
                     $scope.timeshow = true;
                 }
                 else {
@@ -135,6 +155,7 @@
         };
         $scope.onSelectDate = function($item) {
             $state.go('search');
+            $scope.isCollapsed = true;
             $item.setDate($item.getDate() + 1);
             $scope.date = $item.toISOString().substring(0, 10);
             if ($scope.qMethod == 'select') {
@@ -147,13 +168,6 @@
                     $scope.trips = data;
                 });
             }
-        };
-        $scope.viewTrip = function(id) {
-            $state.go('trip', id);
-            $scope.tripid = id;
-            tripService.getDataDestID($scope.tripid).then(function(data) {
-                $scope.tripdet = data;
-            });
         };
     });
 })();

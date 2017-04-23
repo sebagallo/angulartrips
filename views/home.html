@@ -20,7 +20,9 @@
                     <h3>da {{trip.avail | date:'fullDate'}}</h3>
                     <h3>{{trip.durata}} notti - <strong>{{trip.prezzo | currency:'€':0}}</strong></h3>
                     <p class="pull-right">
-                        <button ng-click="viewTrip(trip.id)" class="btn btn-primary">Visualizza Viaggio!</button>
+                        <!-- <button ng-click="viewTrip(trip.id)" class="btn btn-primary">Visualizza Viaggio!</button> -->
+                        <!-- <a ng-href="#!/trip/{{trip.id}}" class="btn btn-primary" role="button">Visualizza Viaggio!</a> -->
+                        <a ui-sref="trip({id: trip.id})" class="btn btn-primary" role="button">Visualizza Viaggio!</a>
                     </p>
                 </div>
             </div>

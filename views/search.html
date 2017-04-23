@@ -11,7 +11,7 @@
         <h1>{{ trip.prezzo | currency:'€':0 }}</h1>
         <h2>{{ trip.durata + " notti!" }}</h2>
         <p>
-            <button ng-click="viewTrip(trip.id)" class="btn btn-primary">Visualizza Viaggio!</button>
+            <a ui-sref="trip({id: trip.id})" class="btn btn-primary" role="button">Visualizza Viaggio!</a>
         </p>
     </div>
 </div>

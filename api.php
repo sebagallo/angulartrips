@@ -67,7 +67,7 @@ if ($sel=="listDestSearch")
 
 if ($sel=="listDestAvail")
 {
-    $stmnt = $db->prepare('SELECT DISTINCT avail FROM travels WHERE dest = :dest;');
+    $stmnt = $db->prepare('SELECT DISTINCT avail FROM travels WHERE dest = :dest ORDER BY avail ASC;');
     $stmnt->bindValue(':dest', $sel_dest);
     $result = $stmnt->execute();
     while ($row = $result->fetchArray()) {
@@ -79,7 +79,7 @@ if ($sel=="listDestAvail")
 if ($sel=="listDestAvailSearch")
 {
     $sel_dest = '%'.$sel_dest.'%';
-    $stmnt = $db->prepare('SELECT DISTINCT avail FROM travels WHERE dest LIKE ?');
+    $stmnt = $db->prepare('SELECT DISTINCT avail FROM travels WHERE dest LIKE ? ORDER BY avail ASC');
     $stmnt->bindValue(1, $sel_dest);
     $result = $stmnt->execute();
     while ($row = $result->fetchArray()) {

@@ -50,7 +50,29 @@ angular.module('store').factory('tripService', function($http) {
             return $http.get(apiPath+'?q=dataDestID&id='+dest).then(function(resp) {
                 return resp.data;
             });
-        },
+        }
+    };
+    return service;
+});
+
+angular.module('store').factory('caldateService', function() {
+    var service = {
+        getAvailDates: function(data, date) {
+            var dpDate = data.date;
+            var dpMode = data.mode;
+            function areDatesEqual(date1, date2) {
+                var comp1 = date1.getFullYear()+"-"+date1.getMonth()+"-"+date1.getDate();
+                var comp2 = date2.getFullYear()+"-"+date2.getMonth()+"-"+date2.getDate();
+                return (comp1 === comp2);
+            }
+            var isAvail = true;
+            for(var i = 0; i < date.length ; i++) {
+                if(areDatesEqual(new Date(date[i]), dpDate)){
+                    isAvail = false;
+                }
+            }
+            return ( dpMode === 'day' && isAvail );
+        }
     };
     return service;
 });
