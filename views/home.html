@@ -1,0 +1,29 @@
+<div class="home row">
+    <div class="home-carousel">
+        <div uib-carousel active="carActive" interval="carInterval" no-wrap="false" template-url="tmpl/carousel.html">
+            <div uib-slide ng-repeat="slide in carSlides track by slide.id" index="slide.id">
+                <a ng-href="{{slide.link}}">
+                    <img ng-src="{{slide.image}}" style="margin:auto;">
+                    <div class="carousel-caption">
+                        <h1 class="text-uppercase">{{slide.text}}</h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div ng-repeat="trip in homeTrips">
+        <div class="col-xs-12 col-sm-6 col-md-4 hometrip">
+            <div class="innertrip" style="background-image:url({{trip.img_path}})">
+                <div class="tripcontent text-center">
+                    <h2><strong>{{trip.dest}}</strong></h2>
+                    <p class="small">{{trip.resort}}</p>
+                    <h3>da {{trip.avail | date:'fullDate'}}</h3>
+                    <h3>{{trip.durata}} notti - <strong>{{trip.prezzo | currency:'€':0}}</strong></h3>
+                    <p class="pull-right">
+                        <button ng-click="viewTrip(trip.id)" class="btn btn-primary">Visualizza Viaggio!</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

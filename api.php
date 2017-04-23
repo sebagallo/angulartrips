@@ -28,6 +28,7 @@ $ret=array();
 
 if(isset($_GET["dest"])) $sel_dest = $_GET["dest"];
 if(isset($_GET["avail"])) $sel_avail = $_GET["avail"];
+if(isset($_GET["id"])) $sel_id = $_GET["id"];
 if(isset($_GET["q"])) $sel = $_GET["q"];
 
 $db = new SQLite3('temp.db');
@@ -91,6 +92,17 @@ if ($sel=="dataDest")
 {
     $stmnt = $db->prepare('SELECT * FROM travels WHERE dest = :dest;');
     $stmnt->bindValue(':dest', $sel_dest);
+    $result = $stmnt->execute();
+    while ($row = $result->fetchArray(1)) {
+        $ret[$x]= $row;
+        $x++;
+    }
+}
+
+if ($sel=="dataDestID")
+{
+    $stmnt = $db->prepare('SELECT * FROM travels WHERE id = :id;');
+    $stmnt->bindValue(':id', $sel_id);
     $result = $stmnt->execute();
     while ($row = $result->fetchArray(1)) {
         $ret[$x]= $row;

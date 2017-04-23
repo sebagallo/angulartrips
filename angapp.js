@@ -1,24 +1,33 @@
 (function () {
-    var app = angular.module('store', ['ngAnimate', 'ngTouch', 'ngRoute', 'ui.bootstrap']);
+    var app = angular.module('store', ['ngAnimate', 'ngTouch', 'ui.router', 'ui.bootstrap']);
 
-    app.config(function($routeProvider) {
-        $routeProvider
-        .when("/", {
-            templateUrl: "home.php",
-        })
-        .when("/viaggio/:id/*", {
-            templateUrl: "viaggio.php",
-        });
+    app.config(function($stateProvider) {
+        var homeState = {
+            name: 'home',
+            url: '/',
+            templateUrl: 'views/home.html',
+            controller: 'HomeCtrl'
+        };
+        var searchState = {
+            name: 'search',
+            url: '/search',
+            templateUrl: 'views/search.html'
+        };
+        var tripState = {
+            name: 'trip',
+            url: '/trip',
+            templateUrl: 'views/trip.html'
+        };
+      $stateProvider.state(homeState);
+      $stateProvider.state(searchState);
+      $stateProvider.state(tripState);
     });
 
-    app.controller('TravelCtrl', function($scope, $http) {
-        $scope.isLoading = undefined;
-        $scope.isHome = true;
-        $scope.qMethod = undefined;
-        $scope.dest = undefined;
-        $scope.avails = undefined;
-        $scope.isCollapsed = true;
-        //carousel
+    app.controller('HomeCtrl', function($scope, tripService) {
+        $scope.homeTrips = "";
+        tripService.getLastTrips().then(function(data) {
+            $scope.homeTrips = data;
+        });
         $scope.carActive = 0;
         $scope.carInterval = 6000;
         $scope.carIndex = 0;
@@ -31,7 +40,7 @@
             },
             {
                 image: 'https://azure.luxresorts.com/media/3040876/Hotel-In-Mauritius-LUX-Le-Morne-Beach-Resort.jpg',
-                text: 'Scopri le nuove offerte per l\'estate 2016',
+                text: 'Scopri le nuove offerte per l\'estate 2017',
                 id: $scope.carIndex++,
                 link: '#'
             },
@@ -48,47 +57,57 @@
                 link: '#'
             }
         ];
-        //carousel-end
+    });
+
+    app.controller('TravelCtrl', function($scope, $state, tripService) {
+        $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            $scope.isLoading = true;
+            $scope.isCollapsed = true;
+        });
+        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+            $scope.isLoading = false;
+        });
+        $state.go('home');
+        $scope.qMethod = "";
+        $scope.dest = "";
+        $scope.avails = "";
+        $scope.isCollapsed = true;
         //datepicker
         $scope.dpOpen = function() {
             $scope.dpPopup.opened = true;
         };
-            $scope.dpPopup = {
-                opened: false
+        $scope.dpPopup = {
+            opened: false
         };
-            $scope.dpOptions = {
-                showWeeks: false
-        };
-        $scope.returnHome = function () {
-            $scope.isHome = true;
-            $scope.timeshow = false;
-        };
-        $scope.asyncTA = function(val) {
-            return $http.get('api.php?q=listDestSearch&dest='+val).then(function(data){
-                  return data.data;
-            });
+        $scope.dpOptions = {
+            showWeeks: false
         };
         //datepicker-end
+        $scope.returnHome = function () {
+            $state.go('home');
+        };
+        $scope.asyncTA = function(dest) {
+            return tripService.getListDestSearch(dest);
+        };
         $scope.onSearchSubmit = function($item, method) {
-            $scope.isLoading = true;
-            $scope.isHome = false;
+            $scope.dest = $item;
             $scope.qMethod = method;
+            $state.go('search', $scope.dest);
             if ($scope.qMethod == 'select') {
-                $scope.query1 = 'api.php?q=dataDest&dest=';
-                $scope.query2 = 'api.php?q=listDestAvail&dest=';
+                $scope.query1 = '?q=dataDest&dest=';
+                $scope.query2 = '?q=listDestAvail&dest=';
             }
             if ($scope.qMethod == 'search') {
-                $scope.query1 = 'api.php?q=dataDestSearch&dest=';
-                $scope.query2 = 'api.php?q=listDestAvailSearch&dest=';
+                $scope.query1 = '?q=dataDestSearch&dest=';
+                $scope.query2 = '?q=listDestAvailSearch&dest=';
             }
-            $scope.dest = $item;
-            $http.get($scope.query1+$scope.dest).then(function(data){
-                $scope.trips = data.data;
+            tripService.getCustomQuery($scope.query1, $scope.dest).then(function(data) {
+                $scope.trips = data;
             });
-            $http.get($scope.query2+$scope.dest).then(function(data){
-                $scope.avails = data.data;
+            tripService.getCustomQuery($scope.query2, $scope.dest).then(function(data) {
+                $scope.avails = data;
                 if ($scope.avails.length > 0) {
-                    //datepicker calendar
+                    //datepicker calendar dates
                     $scope.dpOptions.initDate = new Date($scope.avails[0]);
                     $scope.dpOptions.dateDisabled = function (data) {
                         var dpDate = data.date;
@@ -106,40 +125,35 @@
                             }
                             return ( dpMode === 'day' && isAvail );
                         };
-                    //datepicker calendar end
+                    //datepicker calendar dates end
                     $scope.timeshow = true;
                 }
-                else{
+                else {
                     $scope.timeshow = false;
                 }
-            }).finally(function() {
-                $scope.isLoading = false;
-                $scope.isCollapsed = true;
             });
         };
         $scope.onSelectDate = function($item) {
-            $scope.isLoading = true;
-            $scope.isHome = false;
+            $state.go('search');
             $item.setDate($item.getDate() + 1);
             $scope.date = $item.toISOString().substring(0, 10);
             if ($scope.qMethod == 'select') {
-                $scope.query3 = 'api.php?q=dataDestAvail&dest=';
+                tripService.getDataDestAvail($scope.dest, $scope.date).then(function(data) {
+                    $scope.trips = data;
+                });
             }
             if ($scope.qMethod == 'search') {
-                $scope.query3 = 'api.php?q=dataDestAvailSearch&dest=';
+                tripService.getDataDestAvailSearch($scope.dest, $scope.date).then(function(data) {
+                    $scope.trips = data;
+                });
             }
-            $http.get($scope.query3+$scope.dest+'&avail='+$scope.date).then(function(data){
-                $scope.trips = data.data;
-            }).finally(function() {
-                $scope.isLoading = false;
-                $scope.isCollapsed = true;
-            });
         };
-    });
-    app.directive('trip', function() {
-        return {
-            restrict: 'AE',
-            templateUrl: 'tmpl/trip.html'
+        $scope.viewTrip = function(id) {
+            $state.go('trip', id);
+            $scope.tripid = id;
+            tripService.getDataDestID($scope.tripid).then(function(data) {
+                $scope.tripdet = data;
+            });
         };
     });
 })();

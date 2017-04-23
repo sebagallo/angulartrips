@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<?php setlocale(LC_ALL, 'it_IT.utf8', 'ita'); ?>
 <html ng-app="store" lang="it-IT">
 
 <head>
@@ -12,6 +11,19 @@
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css?v=3">
+
+    <!-- LIBRARIES REMOTE -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_it-it.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-touch.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <!-- LIBRARIES LOCAL -->
+    <!-- APP SCRIPTS -->
+    <script src="angapp.js"></script>
+    <script src="services/tripserv.js"></script>
 </head>
 
 <body ng-controller="TravelCtrl">

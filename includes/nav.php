@@ -32,3 +32,7 @@
 </nav>
 <div class="container">
     <div style="height:50px"></div>
+    <div ng-show="isLoading" class="loader text-center">
+        <h1>Sto Cercando...</h1>
+        <i class="fa fa-spinner fa-5x"></i>
+    </div>

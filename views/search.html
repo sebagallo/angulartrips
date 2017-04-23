@@ -1,0 +1,17 @@
+<div class="row trips" ng-repeat="trip in trips">
+    <div class="col-xs-12 col-md-3 text-center">
+        <img class="img-responsive img-rounded" alt="{{ trip.resort }}" ng-src="{{ trip.img_path }}">
+        <h3>{{ trip.avail | date:'fullDate' }}</h3>
+    </div>
+    <div class="col-xs-12 col-md-6 text-justify">
+        <h3><strong>{{ trip.dest + " - " + trip.resort }}</strong></h3>
+        <p>{{ trip.txt }}</p>
+    </div>
+    <div class="col-xs-12 col-md-3 text-center">
+        <h1>{{ trip.prezzo | currency:'€':0 }}</h1>
+        <h2>{{ trip.durata + " notti!" }}</h2>
+        <p>
+            <button ng-click="viewTrip(trip.id)" class="btn btn-primary">Visualizza Viaggio!</button>
+        </p>
+    </div>
+</div>

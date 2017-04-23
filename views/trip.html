@@ -1,0 +1,25 @@
+<div class="tripdet">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 text-center">
+            <img class="img-responsive img-rounded" alt="{{ tripdet[0].resort }}" ng-src="{{ tripdet[0].img_path }}">
+        </div>
+        <div class="col-xs-12 col-md-6 text-center">
+            <h3><strong>{{ tripdet[0].dest + " - " + tripdet[0].resort }}</strong></h3>
+            <h3>{{ tripdet[0].avail | date:'fullDate' }}</h3>
+            <h2>{{ tripdet[0].durata + " notti!" }}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div style="padding-top:30px" class="col-xs-12 col-md-12 text-justify">
+            <p>{{ tripdet[0].txt }}</p>
+            <p>{{ tripdet[0].txt }}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-12 text-right">
+            <p>
+                <button class="btn btn-primary" disabled>{{ tripdet[0].prezzo | currency:'€':0 }} - Prenota Ora!</button>
+            </p>
+        </div>
+    </div>
+</div>
