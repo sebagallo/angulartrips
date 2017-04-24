@@ -56,6 +56,7 @@ angular.module('store').factory('tripService', function($http) {
 });
 
 angular.module('store').factory('caldateService', function() {
+    var timeshow = false;
     var service = {
         getAvailDates: function(data, date) {
             var dpDate = data.date;
@@ -72,6 +73,12 @@ angular.module('store').factory('caldateService', function() {
                 }
             }
             return ( dpMode === 'day' && isAvail );
+        },
+        getTimeshow: function(data) {
+            return timeshow;
+        },
+        setTimeshow: function(data) {
+            timeshow = data;
         }
     };
     return service;
