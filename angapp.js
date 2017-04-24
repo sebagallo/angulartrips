@@ -15,14 +15,17 @@
             templateUrl: 'views/search.html',
             resolve: {
                 srcData: function(tripService, $stateParams) {
-                    return tripService.getDataDestSearch($stateParams.dest);
+                    if (tripService.getQMethod == 'select') return tripService.getDataDest($stateParams.dest);
+                    else return tripService.getDataDestSearch($stateParams.dest);
                 },
                 srcAvail: function(tripService, $stateParams) {
-                    return tripService.getListDestAvailSearch($stateParams.dest);
+                    if (tripService.getQMethod == 'select') return tripService.getListDestAvail($stateParams.dest);
+                    else return tripService.getListDestAvailSearch($stateParams.dest);
                 },
                 srcDate: function(tripService, $stateParams) {
                     if ($stateParams.avail) {
-                        return tripService.getDataDestAvailSearch($stateParams.dest, $stateParams.avail);
+                        if (tripService.getQMethod == 'select') return tripService.getDataDestAvail($stateParams.dest, $stateParams.avail);
+                        else return tripService.getDataDestAvailSearch($stateParams.dest, $stateParams.avail);
                     }
                 }
             }
@@ -138,48 +141,15 @@
             $scope.isCollapsed = true;
             $scope.dest = $item;
             $scope.qMethod = method;
+            tripService.setQMethod($scope.qMethod);
             $scope.timeshow = caldateService.getTimeshow;
             $state.go('search', {'dest': $scope.dest, 'avail': ''});
-            // if ($scope.qMethod == 'select') {
-            //     $scope.query1 = '?q=dataDest&dest=';
-            //     $scope.query2 = '?q=listDestAvail&dest=';
-            // }
-            // if ($scope.qMethod == 'search') {
-            //     $scope.query1 = '?q=dataDestSearch&dest=';
-            //     $scope.query2 = '?q=listDestAvailSearch&dest=';
-            // }
-            // tripService.getCustomQuery($scope.query1, $scope.dest).then(function(data) {
-            //     $scope.trips = data;
-            // });
-            // tripService.getCustomQuery($scope.query2, $scope.dest).then(function(data) {
-            //     $scope.avails = data;
-            //     if ($scope.avails.length > 0) {
-            //         $scope.dpOptions.initDate = new Date($scope.avails[0]);
-            //         $scope.dpOptions.dateDisabled = function(data, date) {
-            //             return caldateService.getAvailDates(data, $scope.avails);
-            //         };
-            //         $scope.timeshow = true;
-            //     }
-            //     else {
-            //         $scope.timeshow = false;
-            //     }
-            // });
         };
         $scope.onSelectDate = function($item) {
             $scope.isCollapsed = true;
             $item.setDate($item.getDate() + 1);
             $scope.date = $item.toISOString().substring(0, 10);
             $state.go('search', {'dest': $scope.dest, 'avail': $scope.date});
-            // if ($scope.qMethod == 'select') {
-            //     tripService.getDataDestAvail($scope.dest, $scope.date).then(function(data) {
-            //         $scope.trips = data;
-            //     });
-            // }
-            // if ($scope.qMethod == 'search') {
-            //     tripService.getDataDestAvailSearch($scope.dest, $scope.date).then(function(data) {
-            //         $scope.trips = data;
-            //     });
-            // }
         };
     });
 })();

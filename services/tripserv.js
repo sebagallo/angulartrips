@@ -1,6 +1,13 @@
 angular.module('store').factory('tripService', function($http) {
     var apiPath = 'api.php';
+    var qMethod = 'search';
     var service = {
+        getQMethod: function() {
+            return qMethod;
+        },
+        setQMethod: function(data) {
+            qMethod = data;
+        },
         getCustomQuery: function(query, data) {
             return $http.get(apiPath+query+data).then(function(resp) {
                 return resp.data;
@@ -74,7 +81,7 @@ angular.module('store').factory('caldateService', function() {
             }
             return ( dpMode === 'day' && isAvail );
         },
-        getTimeshow: function(data) {
+        getTimeshow: function() {
             return timeshow;
         },
         setTimeshow: function(data) {
