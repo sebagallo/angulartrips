@@ -93,6 +93,10 @@ body {
     background-image: url(images/sand2.png);
 }
 
+.navbar-form {
+    width: 200px;
+}
+
 .navbar-sandtheme {
     background-image: url(images/sand2.png);
     box-shadow: 0 0 10px #0028;
