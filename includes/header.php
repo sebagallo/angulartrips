@@ -10,8 +10,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     <link rel="shortcut icon" href="http://www.sebagallo.eu/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css?v=3">
-
     <!-- LIBRARIES REMOTE -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.6.4/angular-locale_it-it.min.js"></script>
@@ -21,9 +19,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
     <!-- LIBRARIES LOCAL -->
-    <!-- APP SCRIPTS -->
-    <script src="angapp.js"></script>
-    <script src="services/tripserv.js"></script>
+    <!-- APP SCRIPTS /CSS -->
+    <?php
+    echo '
+    <link rel="stylesheet" href="style.css?v='.filemtime('style.css').'">
+    <script src="angapp.js?v='.filemtime('angapp.js').'"></script>
+    <script src="services/tripserv.js?v='.filemtime('services/tripserv.js').'"></script>'
+    ?>
 </head>
 
 <body ng-controller="TravelCtrl">
